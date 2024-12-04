@@ -7,6 +7,7 @@ def server_static(filename):
     return static_file(filename, root='./static')
 
 
+
 @route('/')
 def home():
     db = Database()
@@ -110,9 +111,31 @@ def home():
                     JOIN usuarios u ON p.id_usuario = u.id;""")
     return template('indexProfes', profesores=rs)
 
+
+
+def obtener_usuarios_sin_profesor():
+    db = Database()
+
+    # Consulta para obtener usuarios sin profesor
+    rs = db.fetchall("""
+        SELECT id, nombre_usuario FROM usuarios
+        WHERE id NOT IN (SELECT id_usuario FROM profesores)
+    """)
+    
+    # Convertir el resultado a una lista de diccionarios
+    usuarios = [{"id": row[0], "nombre_usuario": row[1]} for row in rs]
+    
+    db.close()
+    return usuarios
+
+
+
 @route('/profesor/agregar')
 def profesor_agregar():
-    return template('profesor_agregar')
+    # Obtener los usuarios sin profesor asociado
+    usuarios_sin_profesor = obtener_usuarios_sin_profesor()
+    # Pasar los usuarios a la plantilla
+    return template('profesor_agregar', usuariosDisp=usuarios_sin_profesor)
 
 @route('/profesor/create', method='POST')
 def create_profesor():
@@ -128,7 +151,7 @@ def create_profesor():
     #i = 'hola ' + str(edad) + ' ,  '
     db = Database()
     query = (
-        f"INSERT INTO usuarios (nombre, apellidos, direccion, foto, codigo_institucional, contrasena, id_usuario) "
+        f"INSERT INTO profesores (nombre, apellidos, direccion, foto, codigo_institucional, contrasena, id_usuario) "
         f"VALUES ('{nombre}', '{apellidos}', '{direccion}', '{foto}', {codigo_institucional}, '{contrasena}', {id_usuario})"
     )
     print(query)
@@ -146,11 +169,11 @@ def editar_profesor():
     db = Database()
     # datos del pokemons
     query = (f"SELECT * FROM profesores WHERE id = {profesor_id};")
-    usuario = db.fetchone(query)
+    profesor = db.fetchone(query)
     # generacione
     db.close()
     # ir al inicio
-    return template('profesor_editar', usuario=usuario)
+    return template('profesor_editar', profesor=profesor)
 
 @route('/profesor/edit', method='POST')
 def edit_profesor():
@@ -185,6 +208,77 @@ def eliminar_profesor():
     db.close()
     # ir al inicio
     return redirect('/profesores')
+
+@route('/secciones')
+def seccion():
+    db = Database()
+
+    rs = db.fetchall("""SELECT 
+                        s.id,
+                        s.codigo,
+                        cu.nombre AS curso, 
+                        p.apellidos AS profe, 
+                        pe.id AS periodo_id
+                    FROM secciones s
+                    JOIN cursos cu ON s.curso_id = cu.id
+                    JOIN profesores p ON s.profesor_id = p.id
+                    JOIN periodos pe ON s.periodo_id = pe.id;""")
+
+    return template('secciones', secciones=rs)
+
+
+@route('/seccion/editar', method='GET')
+def editar_seccion():
+    # Obtener el ID de la sección desde los parámetros
+    seccion_id = request.query.id
+
+    db = Database()
+    
+    # Obtener datos de la sección
+    query_seccion = f"SELECT * FROM secciones WHERE id = {seccion_id};"
+    seccion = db.fetchone(query_seccion)
+
+    # Obtener todos los estudiantes
+    query_estudiantes = "SELECT id, nombre, apellidos FROM estudiantes;"
+    estudiantes = db.fetchall(query_estudiantes)
+
+    # Obtener estudiantes que pertenecen a la sección
+    query_estudiantes_seccion = f"SELECT estudiante_id FROM estudiantes_secciones WHERE seccion_id = {seccion_id};"
+    estudiantes_seccion = [row[0] for row in db.fetchall(query_estudiantes_seccion)]
+
+    db.close()
+
+    return template(
+        'seccion_editar',
+        seccion=seccion,
+        estudiantes=estudiantes,
+        estudiantes_seccion=estudiantes_seccion
+    )
+
+
+@route('/seccion/edit', method='POST')
+def edit_seccion_submit():
+    # Obtener los datos del formulario
+    seccion_id = request.forms.get('seccion_id')  # Asegúrate de que sea el ID numérico de la sección
+    estudiantes_ids = request.forms.getall('estudiantes')  # Lista de IDs de estudiantes seleccionados
+
+    db = Database()
+    
+    # Paso 1: Borrar todas las relaciones actuales de esta sección en la tabla estudiantes_secciones
+    db.execute(f"DELETE FROM estudiantes_secciones WHERE seccion_id = {seccion_id}")
+
+    # Paso 2: Insertar nuevas relaciones para los estudiantes seleccionados
+    for estudiante_id in estudiantes_ids:
+        query = (
+            f"INSERT INTO estudiantes_secciones (estudiante_id, seccion_id) "
+            f"VALUES ({estudiante_id}, {seccion_id})"
+        )
+        db.execute(query)
+    
+    db.close()
+    
+    # Redirigir a la página de secciones después de guardar
+    redirect('/secciones')
 
 
 @route('/contacto')

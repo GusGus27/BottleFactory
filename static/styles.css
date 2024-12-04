@@ -2,35 +2,56 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: #ffffff; /* Fondo blanco */
+  color: #333333; /* Color de texto gris oscuro */
 }
+
 header {
-  background: #35424a;
-  color: #ffffff;
-  padding: 10px 0;
+  background: #ec6c28; /* Naranja vibrante */
+  color: #ffffff; /* Texto blanco */
+  padding: 20px 0;
   text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
+
 nav {
   margin: 20px 0;
+  text-align: center;
 }
+
 nav a {
-  color: #ffffff;
-  margin: 0 15px;
+  color: #ffffff; /* Texto blanco */
+  background: #333333; /* Fondo negro */
+  margin: 0 10px;
+  padding: 10px 15px;
   text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
+
+nav a:hover {
+  background: #ec6c28; /* Naranja vibrante al pasar el mouse */
+}
+
 .container {
   width: 80%;
   margin: auto;
   overflow: hidden;
   padding: 20px;
-  background: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: #ffffff; /* Fondo blanco */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más intensa */
+  border: 1px solid #ec6c28; /* Borde naranja */
 }
+
 footer {
   text-align: center;
-  padding: 10px 0;
-  background: #35424a;
-  color: #ffffff;
+  padding: 15px 0;
+  background: #333333; /* Fondo negro */
+  color: #ffffff; /* Texto blanco */
+  font-size: 14px;
   position: relative;
   bottom: 0;
   width: 100%;
@@ -39,16 +60,25 @@ footer {
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
-th, td {
-  padding: 8px;
+th {
+  background-color: #ec6c28; /* Fondo naranja */
+  color: #ffffff; /* Texto blanco */
+  text-transform: uppercase;
+  padding: 10px;
+  border: 1px solid #333333; /* Borde negro */
+}
+
+td {
+  padding: 10px;
   text-align: left;
-  border: 1px solid #ccc; /* Borde gris claro */
+  border: 1px solid #cccccc; /* Borde gris claro */
 }
 
 tr:nth-child(even) {
-  background-color: #f0f0f0; /* Plomo claro */
+  background-color: #f9f9f9; /* Gris claro */
 }
 
 tr:nth-child(odd) {
@@ -56,7 +86,22 @@ tr:nth-child(odd) {
 }
 
 tr:hover {
-  background-color: #e0e0e0; /* Color al pasar el mouse */
+  background-color: #FFEDD5; /* Naranja muy claro al pasar el mouse */
+}
+
+button {
+  background: #ec6c28; /* Fondo naranja */
+  color: #ffffff; /* Texto blanco */
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: #C13B1A; /* Naranja más oscuro */
 }
 
 .img-responsive {

@@ -17,21 +17,26 @@
     </header>
     <div class="container">
         <h2>Contenido Principal</h2>
-        <p>A continuación se muestran los usuarios registardos</p>
-        <a href="/usuario/agregar">Agregar Usuario</a>
+        <p>A continuación se muestran las secciones registrados</p>
         <table>
             <thead>
                 <th>ID</th>
-                <th>nombre_usuario</th>
+                <th>Codigo</th>
+                <th>Curso</th>
+                <th>Profesor</th>
+                <!-- <th>foto</th> -->
+                <th>Periodo</th>
             </thead>
             <tbody>
-                % for u in usuarios:
+                % for s in secciones:
                 <tr>
-                    <td>{{u['id']}}</td>
-                    <td>{{u['nombre_usuario']}}</td>
+                    <td>{{s['id']}}</td>
+                    <td>{{s['codigo']}}</td>
+                    <td>{{s['curso']}}</td>
+                    <td>{{s['profe']}}</td>
+                    <td>{{s['periodo_id']}}</td>
                     <td>
-                        <a href="/usuario/editar?id={{u['id']}}">Editar</a>
-                        <a href="/usuario/eliminar?id={{u['id']}}">Eliminar</a>
+                        <a href="/seccion/editar?id={{s['id']}}">Editar</a>
                     </td>
                 </tr>
                 % end

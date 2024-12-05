@@ -25,7 +25,9 @@
                 <th>Curso</th>
                 <th>Profesor</th>
                 <!-- <th>foto</th> -->
-                <th>Periodo</th>
+                <th>Fecha_inicio</th>
+                <th>Fecha_fin</th>
+                <th>ACCIONES</th>
             </thead>
             <tbody>
                 % for s in secciones:
@@ -34,7 +36,8 @@
                     <td>{{s['codigo']}}</td>
                     <td>{{s['curso']}}</td>
                     <td>{{s['profe']}}</td>
-                    <td>{{s['periodo_id']}}</td>
+                    <td>{{s['inicio']}}</td>
+                    <td>{{s['fin']}}</td>
                     <td>
                         <a href="/seccion/editar?id={{s['id']}}">Editar</a>
                     </td>

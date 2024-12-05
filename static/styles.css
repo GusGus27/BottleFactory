@@ -4,9 +4,13 @@ body {
   padding: 0;
   background-color: #ffffff; /* Fondo blanco */
   color: #333333; /* Color de texto gris oscuro */
+  padding-top: 220px; 
 }
 
 header {
+  position: fixed;
+  width: 100%;
+  top: 0;
   background: #ec6c28; /* Naranja vibrante */
   color: #ffffff; /* Texto blanco */
   padding: 20px 0;
@@ -15,6 +19,8 @@ header {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
 }
 
 nav {
@@ -40,7 +46,7 @@ nav a:hover {
   width: 80%;
   margin: auto;
   overflow: hidden;
-  padding: 20px;
+  padding: 50px;
   background: #ffffff; /* Fondo blanco */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más intensa */
   border: 1px solid #ec6c28; /* Borde naranja */

@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Editar Sección: {{seccion['codigo']}}</h1>
+        <h1>{{seccion['curso']}}<br>Sección: {{seccion['codigo']}}</h1>
         <nav>
             <a href="/">Usuarios</a>
             <a href="/profesores">Profesores</a>
@@ -19,8 +19,6 @@
         <h2>Estudiantes</h2>
             <form method="POST" action="/seccion/edit">
                 <input type="hidden" name="seccion_id" value="{{seccion['id']}}">
-                
-                <h2>Editar Sección: {{seccion['codigo']}}</h2>
                 
                 <ul>
                     % for estudiante in estudiantes:

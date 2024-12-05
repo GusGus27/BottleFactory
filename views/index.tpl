@@ -23,6 +23,7 @@
             <thead>
                 <th>ID</th>
                 <th>nombre_usuario</th>
+                <th>ACCIONES</th>
             </thead>
             <tbody>
                 % for u in usuarios:

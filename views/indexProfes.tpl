@@ -28,6 +28,7 @@
                 <!-- <th>foto</th> -->
                 <th>codigo_institucional</th>
                 <th>nombre_usuario</th>
+                <th>ACCIONES</th>
             </thead>
             <tbody>
                 % for p in profesores:

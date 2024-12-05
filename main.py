@@ -218,7 +218,8 @@ def seccion():
                         s.codigo,
                         cu.nombre AS curso, 
                         p.apellidos AS profe, 
-                        pe.id AS periodo_id
+                        pe.fecha_inicio AS inicio,
+                        pe.fecha_fin AS fin
                     FROM secciones s
                     JOIN cursos cu ON s.curso_id = cu.id
                     JOIN profesores p ON s.profesor_id = p.id
@@ -235,7 +236,7 @@ def editar_seccion():
     db = Database()
     
     # Obtener datos de la sección
-    query_seccion = f"SELECT * FROM secciones WHERE id = {seccion_id};"
+    query_seccion = f"SELECT s.id, s.codigo, cu.nombre AS curso FROM secciones s JOIN cursos cu ON s.curso_id = cu.id WHERE s.id = {seccion_id};"
     seccion = db.fetchone(query_seccion)
 
     # Obtener todos los estudiantes

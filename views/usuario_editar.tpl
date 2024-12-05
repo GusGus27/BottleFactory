@@ -8,12 +8,11 @@
 </head>
 <body>
     <header>
-        <h1>Bienvenido a Mi Página</h1>
+        <h1>Whiteboard</h1>
         <nav>
-            <a href="/">Inicio</a>
-            <a href="/nosotros">Acerca de</a>
-            <a href="/servicios">Servicios</a>
-            <a href="/contacto">Contacto</a>
+            <a href="/">Usuarios</a>
+            <a href="/profesores">Profesores</a>
+            <a href="/secciones">Secciones</a>
         </nav>
     </header>
     <div class="container">

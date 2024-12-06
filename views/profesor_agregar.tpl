@@ -29,11 +29,9 @@
             <input type="text" name="foto"><br>
             <label>Codigo</>
             <input type="text" name="codigo_institucional"><br>
-            <label>Contrasena</>
-            <input type="text" name="contrasena"><br> 
 
             <label>Usuario Asociado</label>
-            <select name="id_usuario" required>
+            <select name="usuario_id" required>
                 <option value="">Selecciona un usuario</option>
                 % for usuario in usuariosDisp:
                     <option value="{{usuario['id']}}">{{usuario['nombre_usuario']}}</option>

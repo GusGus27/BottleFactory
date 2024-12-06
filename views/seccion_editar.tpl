@@ -17,6 +17,7 @@
     </header>
     <div class="container">
         <h2>Estudiantes</h2>
+        <a href="/secciones">Retroceder</a>
             <form method="POST" action="/seccion/edit">
                 <input type="hidden" name="seccion_id" value="{{seccion['id']}}">
                 

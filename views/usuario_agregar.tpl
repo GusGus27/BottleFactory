@@ -16,7 +16,7 @@
         </nav>
     </header>
     <div class="container">
-        <h2>Agregar Pokemon</h2>
+        <h2>Agregar Usuario</h2>
         <a href="/">Retroceder</a>
         <form action="/usuario/create" method="post">
             <label>Nombre_usuario</>

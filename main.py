@@ -104,11 +104,10 @@ def home():
                         p.direccion, 
                         p.foto, 
                         p.codigo_institucional, 
-                        p.contrasena,
-                        p.id_usuario,
+                        p.usuario_id,
                         u.nombre_usuario
                     FROM profesores p
-                    JOIN usuarios u ON p.id_usuario = u.id;""")
+                    JOIN usuarios u ON p.usuario_id = u.id;""")
     return template('indexProfes', profesores=rs)
 
 
@@ -119,7 +118,7 @@ def obtener_usuarios_sin_profesor():
     # Consulta para obtener usuarios sin profesor
     rs = db.fetchall("""
         SELECT id, nombre_usuario FROM usuarios
-        WHERE id NOT IN (SELECT id_usuario FROM profesores)
+        WHERE id NOT IN (SELECT usuario_id FROM profesores)
     """)
     
     # Convertir el resultado a una lista de diccionarios
@@ -145,14 +144,13 @@ def create_profesor():
     direccion = request.forms.get('direccion')
     foto = request.forms.get('foto')
     codigo_institucional = request.forms.get('codigo_institucional')
-    contrasena = request.forms.get('contrasena')
-    id_usuario = request.forms.get('id_usuario')
+    usuario_id = request.forms.get('usuario_id')
     # acceder a la base de datos
     #i = 'hola ' + str(edad) + ' ,  '
     db = Database()
     query = (
-        f"INSERT INTO profesores (nombre, apellidos, direccion, foto, codigo_institucional, contrasena, id_usuario) "
-        f"VALUES ('{nombre}', '{apellidos}', '{direccion}', '{foto}', {codigo_institucional}, '{contrasena}', {id_usuario})"
+        f"INSERT INTO profesores (nombre, apellidos, direccion, foto, codigo_institucional, usuario_id) "
+        f"VALUES ('{nombre}', '{apellidos}', '{direccion}', '{foto}', {codigo_institucional}, {usuario_id})"
     )
     print(query)
     db.execute(query)
@@ -183,12 +181,11 @@ def edit_profesor():
     apellidos = request.forms.get('apellidos')
     direccion = request.forms.get('direccion')
     foto = request.forms.get('foto')
-    contrasena = request.forms.get('contrasena')
     # acceder a la base de datos
     #i = 'hola ' + str(edad) + ' ,  '
     db = Database()
     query = (
-        f"UPDATE profesores SET nombre='{nombre}', apellidos = '{apellidos}', direccion = '{direccion}', foto = '{foto}', contrasena = '{contrasena}'"
+        f"UPDATE profesores SET nombre='{nombre}', apellidos = '{apellidos}', direccion = '{direccion}', foto = '{foto}'"
         f" WHERE id = {id}")
     print(query)
     db.execute(query)
